@@ -1,13 +1,18 @@
 import Counter from "../components/counter/Counter";
-import { action, CounterActionType } from "../components/counter/CounterAction";
+import {
+  action,
+  CounterActionType,
+  CounterAction,
+} from "../components/counter/CounterAction";
 import { connect } from "react-redux";
+import { Dispatch } from "react";
 
 function mapStateToProps(state: number) {
   return {
     value: state,
   };
 }
-function mapDispatchToProps(dispatch: Function) {
+function mapDispatchToProps(dispatch: Dispatch<CounterAction>) {
   return {
     onIncrement: () => dispatch(action(CounterActionType.INCREMENT)),
     onDecrement: () => dispatch(action(CounterActionType.DECREMENT)),
