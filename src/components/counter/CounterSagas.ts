@@ -1,9 +1,9 @@
 import { put, takeEvery, all, delay } from "redux-saga/effects";
-import { CounterActionType } from "./CounterAction";
+import { CounterActionType, increment } from "./CounterAction";
 
 function* incrementAsync() {
   yield delay(1000);
-  yield put({ type: CounterActionType.INCREMENT });
+  yield put(increment());
 }
 function* watchIncrementAsync() {
   yield takeEvery(CounterActionType.INCREMENT_ASYNC, incrementAsync);

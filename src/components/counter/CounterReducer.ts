@@ -1,14 +1,26 @@
-import { CounterActionType, CounterAction } from "./CounterAction";
+import { CounterActionType } from "./CounterAction";
+import { handleActions } from "redux-actions";
 
-export default function counter(state: number = 0, action: CounterAction) {
-  switch (action.type) {
-    case CounterActionType.INCREMENT:
-      return state + 1;
-    case CounterActionType.INCREMENT_IF_ODD:
-      return state % 2 !== 0 ? state + 1 : state;
-    case CounterActionType.DECREMENT:
-      return state - 1;
-    default:
-      return state;
-  }
+export interface IState {
+  count: number;
 }
+const defaultState: IState = {
+  count: 0,
+};
+export default handleActions(
+  {
+    [CounterActionType.INCREMENT]: (state, action) => {
+      return { ...state, count: state.count + 1 };
+    },
+    [CounterActionType.INCREMENT_IF_ODD]: (state, action) => {
+      return {
+        ...state,
+        count: state.count % 2 !== 0 ? state.count + 1 : state.count,
+      };
+    },
+    [CounterActionType.DECREMENT]: (state, action) => {
+      return { ...state, count: state.count - 1 };
+    },
+  },
+  defaultState
+);

@@ -1,22 +1,25 @@
 import Counter from "../components/counter/Counter";
-import { action, CounterActionType } from "../components/counter/CounterAction";
+import {
+  decrement,
+  increment,
+  incrementAsync,
+  incrementIfOdd,
+} from "../components/counter/CounterAction";
 import { connect } from "react-redux";
+import { IState } from "../components/counter/CounterReducer";
 
-function mapStateToProps(state: number) {
+function mapStateToProps(state: IState) {
   return {
-    value: state,
+    value: state.count,
   };
 }
 function mapDispatchToProps(dispatch: Function) {
   return {
-    onIncrement: () => dispatch(action(CounterActionType.INCREMENT)),
-    onDecrement: () => dispatch(action(CounterActionType.DECREMENT)),
-    onIncrementIfOdd: () =>
-      dispatch(action(CounterActionType.INCREMENT_IF_ODD)),
-    onIncrementAsync: () => dispatch(action(CounterActionType.INCREMENT_ASYNC)),
+    onIncrement: () => dispatch(increment()),
+    onDecrement: () => dispatch(decrement()),
+    onIncrementIfOdd: () => dispatch(incrementIfOdd()),
+    onIncrementAsync: () => dispatch(incrementAsync()),
   };
 }
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Counter);
-
-export default Container;
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
