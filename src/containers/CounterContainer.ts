@@ -7,13 +7,15 @@ import {
 } from "../components/counter/CounterAction";
 import { connect } from "react-redux";
 import { IState } from "../components/counter/CounterReducer";
+import { Dispatch } from "react";
+import { Action } from "redux-actions";
 
 function mapStateToProps(state: IState) {
   return {
     value: state.count,
   };
 }
-function mapDispatchToProps(dispatch: Function) {
+function mapDispatchToProps(dispatch: Dispatch< Action<void> >) {
   return {
     onIncrement: () => dispatch(increment()),
     onDecrement: () => dispatch(decrement()),
